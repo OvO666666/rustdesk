@@ -100,6 +100,11 @@ const IPC_TOKEN_RANDOM_BYTES: usize = IPC_TOKEN_LEN / 2;
 const _: () = assert!(IPC_TOKEN_LEN % 2 == 0);
 pub static EXIT_RECV_CLOSE: AtomicBool = AtomicBool::new(true);
 
+#[inline]
+pub fn is_hide_connection_manager() -> bool {
+    crate::get_builtin_option("hide-connection-manager") == "Y"
+}
+
 #[cfg(any(target_os = "linux", target_os = "macos"))]
 thread_local! {
     static USE_USER_MAIN_IPC: Cell<bool> = Cell::new(false);

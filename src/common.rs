@@ -1892,6 +1892,11 @@ pub fn pk_to_fingerprint(pk: Vec<u8>) -> String {
 }
 
 #[inline]
+pub fn is_file_transfer_disabled() -> bool {
+    Config::get_option(config::keys::OPTION_ENABLE_FILE_TRANSFER) == "N"
+}
+
+#[inline]
 pub async fn get_next_nonkeyexchange_msg(
     conn: &mut Stream,
     timeout: Option<u64>,

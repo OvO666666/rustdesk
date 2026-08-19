@@ -1291,6 +1291,10 @@ pub fn session_add(
         ConnType::DEFAULT_CONN
     };
 
+    if is_file_transfer && crate::common::is_file_transfer_disabled() {
+        bail!("File transfer is disabled");
+    }
+
     // to-do: check the same id session.
     if let Some(session) = sessions::get_session_by_session_id(&session_id) {
         if session.lc.read().unwrap().conn_type != conn_type {

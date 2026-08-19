@@ -131,6 +131,9 @@ class ServerModel with ChangeNotifier {
   WeakReference<FFI> parent;
 
   ServerModel(this.parent) {
+    if (bind.mainGetBuildinOption(key: "hide-connection-manager") == "Y") {
+      hideCm = true;
+    }
     _emptyIdShow = translate("Generating ...");
     _serverId = IDTextEditingController(text: _emptyIdShow);
 
