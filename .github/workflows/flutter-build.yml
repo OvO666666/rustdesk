@@ -1026,7 +1026,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          sudo apt-get update
+          sudo sed -i -E 's|https?://azure\.archive\.ubuntu\.com|http://archive.ubuntu.com|g' /etc/apt/sources.list.d/ubuntu.sources 2>/dev/null || true
+          sudo apt-get update -o Acquire::Retries=5 -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30
           sudo apt-get install -y \
                clang \
                cmake \
@@ -1307,7 +1308,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          sudo apt-get update
+          sudo sed -i -E 's|https?://azure\.archive\.ubuntu\.com|http://archive.ubuntu.com|g' /etc/apt/sources.list.d/ubuntu.sources 2>/dev/null || true
+          sudo apt-get update -o Acquire::Retries=5 -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30
           sudo apt-get install -y \
                clang \
                cmake \
